@@ -1,7 +1,9 @@
 {
     "report": {
         "inputDir": "/tmp",
-        "outputDir": "/tmp"
+        "outputDir": "/tmp",
+        "exeMinute": 1,
+        "exeSecond": 1
     },
 
     "kafka": {

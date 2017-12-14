@@ -11,6 +11,8 @@ type Config struct {
 	Report struct {
 		InputDir	string	`json:"inputDir"`
 		OutputDir	string	`json:"outputDir"`
+		ExeSecond	int		`json:"exeSecond"`
+		ExeMinute	int		`json:"exeMinute"`
 	} `json:"report"`
 
 	Kafka struct {

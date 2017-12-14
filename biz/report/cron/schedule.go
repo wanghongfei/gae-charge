@@ -15,7 +15,7 @@ type HourTicker struct {
 // 创建一个每小时定点ticker
 // min: tick的分钟数
 // sec: tick的秒数
-func NewHourTicker(min, sec int) (*HourTicker, error) {
+func NewHourTicker(min, sec int) (*HourTicker) {
 	if sec < 0 {
 		sec = 0
 	}
@@ -27,7 +27,7 @@ func NewHourTicker(min, sec int) (*HourTicker, error) {
 	return &HourTicker{
 		minute: min,
 		second: sec,
-	}, nil
+	}
 }
 
 func (obj *HourTicker) Tick() {

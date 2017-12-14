@@ -8,6 +8,7 @@ import (
 	"strings"
 	"gaecharge/kafkalog"
 	"strconv"
+	"gaecharge/config"
 )
 
 type ReportResult struct {
@@ -21,8 +22,8 @@ type ReportResult struct {
 }
 
 func CalculateHourlyReport() error {
-	// 上个小时的时间
-	filename := getLastHourFilename()
+	// 上个小时的时间日志文件
+	filename := config.AppConfig.Report.InputDir + "/" + getLastHour() + ".log"
 
 	result := &ReportResult{
 		UnitMap: make(map[string]int64),
@@ -52,7 +53,7 @@ func writeFile(result *ReportResult) error {
 }
 
 func writeMap(suffix string, dataMap map[string]int64) error {
-	prefix := getLastHourFilename()
+	prefix := config.AppConfig.Report.OutputDir + "/" + getLastHour() + ".log";
 	f, err := os.Create(prefix + suffix)
 	if nil != err {
 		return err
@@ -82,13 +83,13 @@ func processLine(line string, result *ReportResult) {
 	result.TagMap[chargeLog.TagIds]++
 }
 
-func getLastHourFilename() string {
+func getLastHour() string {
 	now := time.Now()
 	diff, _:= time.ParseDuration("-1h")
 	hourAgo := now.Add(diff)
 	timeString := hourAgo.Format("2006010215")
 
-	return "/tmp/" + timeString + ".log"
+	return timeString
 }
 
 func readFileLineByLine(filename string, result *ReportResult, lineFunc func(string, *ReportResult)) error {

@@ -1,11 +1,23 @@
 package db
 
-import "database/sql"
+import (
+	"database/sql"
+	"gaecharge/config"
+	"fmt"
+)
 
 var dbConn *sql.DB
 
 func init0() {
-	db, err := sql.Open("mysql", "root:@tcp(localhost:3306)/gae?charset=utf8")
+	connString := fmt.Sprintf(
+		"%s:%s@tcp(%s:%d)/%s?charset=utf8",
+		config.AppConfig.Database.Username,
+		config.AppConfig.Database.Password,
+		config.AppConfig.Database.Host,
+		config.AppConfig.Database.Port,
+		config.AppConfig.Database.Db)
+
+	db, err := sql.Open("mysql", connString)
 	if nil != err {
 		panic(err)
 	}

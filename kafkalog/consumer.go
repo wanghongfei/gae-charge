@@ -4,6 +4,8 @@ import (
 	"github.com/bsm/sarama-cluster"
 	"github.com/Shopify/sarama"
 	"log"
+	"strings"
+	config2 "gaecharge/config"
 )
 
 func StartConsumer(msgFunc func(message *sarama.ConsumerMessage) error) error {
@@ -11,7 +13,13 @@ func StartConsumer(msgFunc func(message *sarama.ConsumerMessage) error) error {
 	config.Consumer.Offsets.CommitInterval = 1
 	config.Consumer.Offsets.Initial = sarama.OffsetNewest
 
-	consumer, err := cluster.NewConsumer([]string{"10.150.182.11:8092"}, "gae-charge-1", []string{"gae-charge"}, config)
+	consumer, err := cluster.NewConsumer(
+		strings.Split(
+			config2.AppConfig.Kafka.BrokerList, ","),
+			config2.AppConfig.Kafka.Group,
+			[]string{config2.AppConfig.Kafka.Topic},
+			config)
+
 	if nil != err {
 		return err
 	}

@@ -7,9 +7,12 @@ import (
 	"gaecharge/biz/report"
 	"log"
 	"sync"
+	"time"
 )
 
 func main() {
+	time.Sleep(time.Second * 50)
+
 	var wg sync.WaitGroup
 
 	// kafak监听

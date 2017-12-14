@@ -2,12 +2,13 @@ package rediss
 
 import (
 	"github.com/mediocregopher/radix.v2/redis"
+	"gaecharge/config"
 )
 
 var client *redis.Client
 
 func init() {
-	redisClient, err := redis.Dial("tcp", "10.144.17.21:8107")
+	redisClient, err := redis.Dial("tcp", config.AppConfig.Redis.Hosts)
 	if nil != err {
 		panic(err)
 	}

@@ -7,7 +7,7 @@ import (
 )
 
 func TestScheduler_Tick(t *testing.T) {
-	ticker, _ := NewHourTicker(24, 2)
+	ticker := NewHourTicker(30, 15)
 	for {
 		ticker.Tick()
 		now := time.Now()

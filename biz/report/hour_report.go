@@ -53,7 +53,7 @@ func writeFile(result *ReportResult) error {
 }
 
 func writeMap(suffix string, dataMap map[string]int64) error {
-	prefix := config.AppConfig.Report.OutputDir + "/" + getLastHour() + ".log";
+	prefix := config.AppConfig.Report.OutputDir + "/" + getLastHour() + ".log"
 	f, err := os.Create(prefix + suffix)
 	if nil != err {
 		return err

@@ -6,11 +6,12 @@ import (
 	"log"
 	"strings"
 	config2 "gaecharge/config"
+	"time"
 )
 
 func StartConsumer(msgFunc func(message *sarama.ConsumerMessage) error) error {
 	config := cluster.NewConfig()
-	config.Consumer.Offsets.CommitInterval = 1
+	config.Consumer.Offsets.CommitInterval = time.Second * 1
 	config.Consumer.Offsets.Initial = sarama.OffsetNewest
 
 	consumer, err := cluster.NewConsumer(

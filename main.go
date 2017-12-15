@@ -9,7 +9,6 @@ import (
 	"sync"
 	"gaecharge/config"
 	_ "net/http/pprof"
-	"net/http"
 )
 
 func main() {
@@ -23,8 +22,6 @@ func main() {
 	wg.Add(1)
 	startReportTask()
 
-
-	startProfiling()
 	wg.Wait()
 }
 
@@ -47,12 +44,4 @@ func startReportTask() {
 		}
 	}()
 
-}
-
-func startProfiling() {
-	// pprof.StartCPUProfile(f)
-
-	go func() {
-		http.ListenAndServe("localhost:9000", nil)
-	}()
 }

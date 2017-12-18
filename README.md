@@ -10,6 +10,17 @@
 
 Go 1.9.2编译通过。
 
+依赖：
+
+```
+go get github.com/mediocregopher/radix.v2/...
+go get github.com/Shopify/sarama
+go get github.com/bsm/sarama-cluster
+go get github.com/go-sql-driver/mysql
+```
+
+
+
 仓库根目录位于Go标准项目结构的`src/`目录下，因此将代码`clone`至`GOPATH/src`下即可，执行
 
 ```shell

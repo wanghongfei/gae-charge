@@ -7,13 +7,13 @@
     },
 
     "kafka": {
-        "brokerList": "10.150.182.11:8092",
+        "brokerList": "127.0.0.1:8092",
         "group": "gae-charge-1",
         "topic": "gae-charge"
     },
 
     "redis": {
-        "hosts": "10.144.17.21:8107"
+        "hosts": "127.0.0.1:8107"
     },
 
     "database": {

@@ -7,10 +7,11 @@ import (
 	"time"
 	"os"
 	"log"
+	"gaecharge/config"
+	"gaecharge/biz/db"
 )
 
 const KEY_CHARGE_PREFIX = "gae:charge:"
-const SQL_OFFLINE_UNIT = "SELECT ?"
 
 func ConsumeMessage(msg *sarama.ConsumerMessage) error {
 	line := string(msg.Value)
@@ -39,7 +40,13 @@ func ConsumeMessage(msg *sarama.ConsumerMessage) error {
 
 	// 下线
 	if left <= 0 {
+		// 执行下线SQL
+		rows, err := db.ExecuteUpdate(config.AppConfig.OfflineSql, chargeLog.UnitId)
+		if nil != err {
+			return err
+		}
 
+		log.Printf("%v offlined, affected rows = %v\n", chargeLog.UnitId, rows)
 	}
 
 	return nil

@@ -3,17 +3,20 @@ package rediss
 import (
 	"github.com/mediocregopher/radix.v2/redis"
 	"gaecharge/config"
+	"log"
 )
 
 var client *redis.Client
 
-func init() {
+func InitRedis() {
 	redisClient, err := redis.Dial("tcp", config.AppConfig.Redis.Hosts)
 	if nil != err {
 		panic(err)
 	}
 
 	client = redisClient
+
+	log.Printf("redis initialized")
 }
 
 // 扣钱

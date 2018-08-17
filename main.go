@@ -9,9 +9,13 @@ import (
 	"sync"
 	"gaecharge/config"
 	_ "net/http/pprof"
+	"gaecharge/biz/db"
+	"gaecharge/biz/rediss"
 )
 
 func main() {
+	initAll()
+
 	var wg sync.WaitGroup
 
 	// kafak监听
@@ -22,6 +26,7 @@ func main() {
 	wg.Add(1)
 	startReportTask()
 
+	log.Println("gea-charge started")
 	wg.Wait()
 }
 
@@ -43,5 +48,11 @@ func startReportTask() {
 			}
 		}
 	}()
+}
 
+func initAll() {
+	config.InitConfig()
+
+	db.InitDb()
+	rediss.InitRedis()
 }

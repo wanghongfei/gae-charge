@@ -8,6 +8,8 @@ import (
 )
 
 type Config struct {
+	OfflineSql		string	`json:"offlineSql"`
+
 	Report struct {
 		InputDir	string	`json:"inputDir"`
 		OutputDir	string	`json:"outputDir"`
@@ -36,7 +38,7 @@ type Config struct {
 
 var AppConfig *Config
 
-func init() {
+func InitConfig() {
 	f, err := os.Open("config.json")
 	if nil != err {
 		panic(err)
